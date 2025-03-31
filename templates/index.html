@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aplicación Flask - Preferencias</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Preferencias Web</a>
+    </div>
+  </nav>
+  
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card p-4 shadow-sm">
+          <h2 class="text-center">Preferencias de Estilo</h2>
+          <form action="" method="POST">
+            <div class="mb-3">
+              <label for="tipo_texto" class="form-label">Seleccione tipo de texto:</label>
+              <select id="tipo_texto" name="tipo_texto" class="form-select">
+                <option value="Arial" {% if tipo_texto == 'Arial' %}selected{% endif %}>Arial</option>
+                <option value="Verdana" {% if tipo_texto == 'Verdana' %}selected{% endif %}>Verdana</option>
+                <option value="Times New Roman" {% if tipo_texto == 'Times New Roman' %}selected{% endif %}>Times New Roman</option>
+                <option value="Courier New" {% if tipo_texto == 'Courier New' %}selected{% endif %}>Courier New</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="color" class="form-label">Seleccione color:</label>
+              <select id="color" name="color" class="form-select">
+                <option value="red" {% if color == 'red' %}selected{% endif %}>Rojo</option>
+                <option value="blue" {% if color == 'blue' %}selected{% endif %}>Azul</option>
+                <option value="yellow" {% if color == 'yellow' %}selected{% endif %}>Amarillo</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Guardar</button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="col-md-6">
+        <div class="card p-4 shadow-sm">
+          <h2 class="text-center">Lista Integrantes</h2>
+          <ul class="list-group" style="color: {{color}} !important; font-family: {{font_family}};">
+            <li>Alvaro Rodrigo Chambilla Quispe</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <div class="card p-4 shadow-sm">
+          <h2>Enlaces</h2>
+          <ul id="js-links" class="list-group">
+            <li class="list-group-item"><a href="http://Google.com" class="text-decoration-none">Google</a></li>
+            <li class="list-group-item"><a href="https://cvinformatica.umsa.bo/course/view.php?id=36" class="text-decoration-none">Moodle Informática</a></li>
+            <li class="list-group-item"><a href="http://informatica.umsa.bo/" class="text-decoration-none">Informática UMSA</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card p-4 shadow-sm">
+          <h2>Enlaces visitados previamente</h2>
+          <ul class="list-group">
+            {% for enlace in visited_links %}
+              <li class="list-group-item">{{ enlace }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ url_for('static', filename='cookies.js') }}"></script>
+</body>
+</html>
